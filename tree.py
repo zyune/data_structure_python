@@ -21,7 +21,6 @@ class Node:
 
     # middle aorder
     def print_tree_recursion_Midorder(self):
-
         if self.left:
             self.left.print_tree_recursion_Midorder()
         print(self.data)
@@ -39,6 +38,7 @@ class Node:
         print(self.data)
 
 
+# this is a preorder DFS using a stack and will append right node in to stack first
 def depth_first_values(root):
     stack = [root]
     result = []
@@ -53,6 +53,18 @@ def depth_first_values(root):
     return result
 
 
+# This method has some problems on th last return because the return value is
+# a
+# ['b', ['d', [], []], ['e', [], []]]
+# ['c', [], ['f', [], []]]
+def depth_first_values_recursion(root):
+    if root == None:
+        return []
+    left_values = depth_first_values_recursion(root.left)
+    right_values = depth_first_values_recursion(root.right)
+    return [root.data] + [left_values] + [right_values]
+
+
 a = Node("a")
 b = Node("b")
 c = Node("c")
@@ -65,10 +77,12 @@ b.left = d
 b.right = e
 c.right = f
 
-
-a.print_tree_recursion_Preorder()
-print("\n")
-a.print_tree_recursion_Midorder()
-print("\n")
-a.print_tree_recursion_Postorder()
+results = depth_first_values_recursion(a)
+for i in results:
+    print(i)
+# a.print_tree_recursion_Preorder()
+# print("\n")
+# a.print_tree_recursion_Midorder()
+# print("\n")
+# a.print_tree_recursion_Postorder()
 
