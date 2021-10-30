@@ -5,58 +5,28 @@ class Node:
         self.right = None
 
 
-def breadthfirstvalues(root):
+# this is a preorder DFS using a stack and will append right node in to stack first
+def depth_first_values(root):
+    stack = [root]
+    result = []
+    while len(stack) > 0:
+        current = stack.pop()
+        result.append(current)
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+
+    return result
+
+
+# This method has some problems on th last return because the return value is
+# a
+# ['b', ['d', [], []], ['e', [], []]]
+# ['c', [], ['f', [], []]]
+def depth_first_values_recursion(root):
     if root == None:
         return []
-    values = []
-    queue = [root]
-    while len(queue) > 0:
-        current = queue.pop(0)
-        values.append(current.data)
-        if current.left:
-            queue.append(current.left)
-        if current.right:
-            queue.append(current.right)
-    return values
-
-
-# test case 01
-a = Node("a")
-b = Node("b")
-c = Node("c")
-d = Node("d")
-e = Node("e")
-f = Node("f")
-
-a.left = b
-a.right = c
-b.left = d
-b.right = e
-c.right = f
-print(breadthfirstvalues(a))
-# test case 02
-a = Node("a")
-b = Node("b")
-c = Node("c")
-d = Node("d")
-e = Node("e")
-f = Node("f")
-g = Node("g")
-h = Node("h")
-
-a.left = b
-a.right = c
-b.left = d
-b.right = e
-c.right = f
-e.left = g
-f.right = h
-
-
-print(breadthfirstvalues(a))
-# 在python中 [ ] pop()方法默认pop出最右边的那个。如果要pop出最左边的用pop(0)
-# array = ["a", "b", "c"]
-# array.append("fashdjko")
-# array.pop(0)
-# print(array)
-
+    left_values = depth_first_values_recursion(root.left)
+    right_values = depth_first_values_recursion(root.right)
+    return [root.data] + [left_values] + [right_values]
