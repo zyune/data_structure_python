@@ -24,13 +24,14 @@ def binary_search_recursion(theList, left, right, target):
     if midValue == target:
         return midIndex
 
-    if target > midValue:
+    elif target > midValue:
         return binary_search_recursion(theList, midIndex + 1, right, target)
-
-    return binary_search_recursion(theList, left, midIndex - 1, target)
+    else:
+        return binary_search_recursion(theList, left, midIndex - 1, target)
 
 
 my_list = [1, 3, 5, 7, 9]
 print(binary_search(my_list, 3))
 print(binary_search(my_list, -1))
+print(binary_search_recursion(my_list, 0, len(my_list), -1))
 
