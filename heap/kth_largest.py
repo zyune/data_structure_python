@@ -14,13 +14,17 @@ class Solution(object):
         return heap[0]
 
 
+# heapify make an min heap defaultly
+# looking for a keth largest is actually using a min heap other node values are all bigger than the root,then the root is the kthe largest
+# on the other hand. if we are looking for the kth smallest value, we are gonna use a max heap. other node values are all smaller than the root, then the root is the kth smallest
+# what most important matter is the root!!!
+
 nums = [3, 2, 1, 5, 6, 4]
 k = 2
 aaa = Solution()
 print(aaa.findKthLargest(nums, k))
 
 heap = [x for x in nums[:k]]
-heapq.heapify(heap)
 print(heap)
-for i in range(5):
-    print(i)
+heapq.heapify(heap)
+
